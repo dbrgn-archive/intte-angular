@@ -12,11 +12,17 @@ var allowCrossDomain = function(req, res, next) {
     next();
 };
 
+var logger = function(req, res, next) {
+    console.log(req.method + " " + req.url);
+    next();
+}
+
 var app = express();
 app.use(allowCrossDomain);
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.session({secret: '2234567890QWERTY'}));
+app.use(logger);
 app.use(app.router);
 
 
