@@ -175,7 +175,7 @@ app.post('/comments/:id/down', checkAuth, function (req, res) {
 });
 
 app.post('/logout', function (req, res) {
-    req.session.user_id  = null;
+    req.session.user_id = null;
     res.json(true);
 });
 

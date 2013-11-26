@@ -44,18 +44,27 @@
             <!-- Login Container -->
             <div class="navbar-collapse collapse">
                 <form id="userform">
-                    <div class="navbar-form navbar-right" role="form">
-                        <div class="form-group">
-                            <input class="form-control input-sm" type="text" placeholder="Benutzername" data-ng-model="username" />
+                    <div data-ng-show="!is_logged_in()">
+                        <div class="navbar-form navbar-right" role="form">
+                            <div class="form-group">
+                                <input class="form-control input-sm" type="text" placeholder="Benutzername" data-ng-model="input_username" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control input-sm" name="password input-sm" type="text" placeholder="Passwort" data-ng-model="input_password" />
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-sm btn-success" data-ng-click="login()">Einloggen</button>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-sm btn-primary" href="/register.html">Konto erstellen</a>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control input-sm" name="password input-sm" type="text" placeholder="Passwort" data-ng-model="password" />
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-sm btn-success" ng-click="login()">Einloggen</button>
-                        </div>
-                        <div class="form-group">
-                            <a class="btn btn-sm btn-primary" href="/register.html">Konto erstellen</a>
+                    </div>
+                    <div data-ng-show="is_logged_in()">
+                        <div class="navbar-form navbar-right" role="form">
+                            <div class="form-group">
+                                <button class="btn btn-sm btn-primary" data-ng-click="logout()">Abmelden</button>
+                            </div>
                         </div>
                     </div>
                 </form>
