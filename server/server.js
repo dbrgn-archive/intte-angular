@@ -182,6 +182,3 @@ io.sockets.on('connection', function (socket) {
 io.sockets.on('disconnect', function (socket) {
     socket.emit('message', { action: 'disconnect' });
 });
-
-
-
