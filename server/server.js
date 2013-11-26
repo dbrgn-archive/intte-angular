@@ -39,19 +39,21 @@ comments.push(comment);
 entries[0].comments.push(comment);
 
 //default user
-users.push(new User(users.length, "a", "a") );
-  
+users.push(new User(0, "chrigi", "foobar") );
+users.push(new User(1, "danilo", "foo") );
+users.push(new User(2, "jonas", "bar") );
+
 function findUser(name)
 {
-	for (var i in users) 
-	{
-	   var user = users[i];
-	   if( user.name == name)
-	   {
-		   return user;
-	   }
-	}
-	return null;
+    for (var i in users)
+    {
+       var user = users[i];
+       if( user.name == name)
+       {
+           return user;
+       }
+    }
+    return null;
 }
 
 function returnIndex(res, id, array) {
@@ -63,79 +65,80 @@ function returnIndex(res, id, array) {
 }
 
 app.get('/', function(req, res) {
-  res.type('text/plain'); 
+  res.type('text/plain');
   res.json(entries);
 });
- 
+
+// TODO this endpoint makes no sense, can we remove it?
 app.get('/login', function (req, res) {
     if (typeof (req.session.user_id) == "number") {
         res.json(users[req.session.user_id].name);
         return;
     }
-    res.json("");
-});
- 
- app.post('/login', function (req, res) {
-    var post = req.body;  
-	var user = findUser(post.name);	 
-	if( !!user && post.password == user.password)
-	{		
-		req.session.user_id = user.id;		
-		res.json(true);		
-		return;
-	}	
-	res.json(false);
+    res.json(null);
 });
 
- app.post('/register', function(req, res) {
-     var post = req.body;
-     
-     if (typeof(post.name) != "string" || typeof(post.password) != "string") {
-         res.json(false);
-         return;
-     }
-     
-     if (findUser(post.name)) {
-         res.json(false);
-         return;
-     }
-     users.push(new User(users.length, post.name, post.password));
-     res.json(true);
- });
- 
- app.get('/users', function (req, res) {
-     res.json(users);
- });
+app.post('/login', function (req, res) {
+    var post = req.body;
+    var user = findUser(post.name);
+    if (!!user && post.password == user.password)
+    {
+        req.session.user_id = user.id;
+        res.json(true);
+        return;
+    }
+    res.json(false);
+});
 
- 
- 
- app.get('/entries', function (req, res) {
+app.post('/register', function(req, res) {
+    var post = req.body;
+
+    if (typeof(post.name) != "string" || typeof(post.password) != "string") {
+        res.json(false);
+        return;
+    }
+
+    if (findUser(post.name)) {
+        res.json(false);
+        return;
+    }
+    users.push(new User(users.length, post.name, post.password));
+    res.json(true);
+});
+
+app.get('/users', function (req, res) {
+    res.json(users);
+});
+
+
+
+app.get('/entries', function (req, res) {
     res.json(entries);
 });
 
 
-app.post('/entry', function(req, res) {
-    var newLink = new Link(entries.length, req.body.title, users[req.session.user_id].name, req.body.url);	
- 	entries.push(newLink);
- 	res.json(newLink);
- 	io.sockets.emit('message', { action: "AddLink" });
+app.post('/entries', function(req, res) {
+    var newLink = new Link(entries.length, req.body.title, users[req.session.user_id].name, req.body.url);
+    entries.push(newLink);
+    res.json(newLink);
+    io.sockets.emit('message', { action: "AddLink" });
 });
 
-app.get('/entry/:id', function(req, res) {
+app.get('/entries/:id', function(req, res) {
    returnIndex(res,  req.params.id, entries);
 });
 
-app.post('/entry/:id/up', checkAuth, function (req, res) {
+app.post('/entries/:id/up', checkAuth, function (req, res) {
     res.json(entries[req.params.id].rating._up(req.session.user_id));
     io.sockets.emit('message', { action: "Rated" });
 });
 
-app.post('/entry/:id/down', checkAuth, function (req, res) {
+app.post('/entries/:id/down', checkAuth, function (req, res) {
     res.json(entries[req.params.id].rating._down(req.session.user_id));
     io.sockets.emit('message', { action: "Rated" });
 });
 
-app.post('/entry/:id/comment', checkAuth, function (req, res) {
+app.post('/entries/:id/comments', checkAuth, function (req, res) {
     var newComment = new Comment(comments.length, req.body.text, users[req.session.user_id].name);
     comments.push(newComment);
 
@@ -145,7 +148,7 @@ app.post('/entry/:id/comment', checkAuth, function (req, res) {
     io.sockets.emit('message', { action: "AddComment" });
 });
 
-app.post('/comment/:id/', checkAuth, function (req, res) {
+app.post('/comments/:id/', checkAuth, function (req, res) {
     var newComment = new Comment(comments.length, req.body.text, users[req.session.user_id].name);
     comments.push(newComment);
 
@@ -155,19 +158,19 @@ app.post('/comment/:id/', checkAuth, function (req, res) {
     io.sockets.emit('message', { action: "AddComment" });
 });
 
-app.post('/comment/:id/up', checkAuth, function (req, res) {
+app.post('/comments/:id/up', checkAuth, function (req, res) {
     res.json(comments[req.params.id].rating._up(req.session.user_id));
     io.sockets.emit('message', { action: "Rated" });
 });
 
-app.post('/comment/:id/down', checkAuth, function (req, res) {
+app.post('/comments/:id/down', checkAuth, function (req, res) {
     res.json(comments[req.params.id].rating._down(req.session.user_id));
     io.sockets.emit('message', { action: "Rated" });
 });
 
 app.post('/logout', function (req, res) {
-	req.session.user_id  = null;	
-	res.json(true);
+    req.session.user_id  = null;
+    res.json(true);
 });
 
 app.use('/', express.static(__dirname + '/../client/'));
