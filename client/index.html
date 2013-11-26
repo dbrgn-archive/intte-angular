@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app>
+<html lang="en" data-ng-app="hasglaese">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,29 +65,31 @@
         <div class="container" id="content">
             <h1>Alle Posts</h1>
             <h3><strong>Hallo, {{name}}!</strong></h3>
-            <p>In dieser Liste sind alle Posts die verfügbar sind!Bitte anmelden um alle Funktionen nutzen zu können.<br/><br/>chrigi:foobar<br/>danilo:foo<br/>jonas:bar
-            </p>
+            <p>In dieser Liste sind alle Posts die verfügbar sind!
+            Bitte anmelden um alle Funktionen nutzen zu können.</p>
+            <p>chrigi:foobar<br/>danilo:foo<br/>jonas:bar</p>
         </div>
     </div>
 
     <div class="container">
-        <div class="row">
+        <div class="row" data-ng-repeat="entry in entries">
             <div class="post">
                 <div class="voteContainer">
                     <div class="voteButton up"><span>upvote</span></div>
+                    <div class="postScore text-center"><span>{{ entry.rating.value }}</span></div>
                     <div class="voteButton down"><span>downvote</span></div>
                 </div>
                 <div class="postContainer">
                     <a href="#" class="postLink">
-                        <h2 class="postTitle">Namics Headbang</h2>
+                        <h2 class="postTitle">{{ entry.title }}</h2>
 
                         <div class="postInfo">
                             <span class="postTime">34 Sekunde(n)  </span> von
-                            <span class="postUser">jonas</span>
+                            <span class="postUser">{{ entry.author }}</span>
                         </div>
                         <p class="comments">
                             <span class="glyphicon glyphicon-comment"></span>
-                            <span>0 Kommentar(e)</span>
+                            <span>{{ entry.comments.length }} Kommentar(e)</span>
                         </p>
                     </a>
                 </div>

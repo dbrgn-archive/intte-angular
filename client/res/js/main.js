@@ -1,7 +1,11 @@
-// Add Restangular as a dependency to your app
-angular.module('hasglaese', ['restangular']);
-
-// Inject Restangular into your controller
-angular.module('hasglaese').controller('MainCtrl', function($scope, Restangular) {
-  // ...
-});
+// Configure Angular module
+//
+angular.module('hasglaese.service', []);
+angular.module('hasglaese.directive', []);
+angular.module('hasglaese.filter', []);
+angular.module('hasglaese', [
+    'hasglaese.service',
+    'hasglaese.directive',
+    'hasglaese.filter',
+    'restangular'
+]);

@@ -38,13 +38,17 @@ var entries = [];
 var users = [];
 var comments = [];
 
-//sample data
-entries.push(new Link(entries.length, "Title", "Author", "http://www.google.ch"));
-var comment = new Comment(0, "TestComment", "Author");
+// Default entries
+entries.push(new Link(0, "Namics Headbang", "jonas", "http://www.namics.ch/"));
+entries.push(new Link(1, "Arduino", "chrigi", "http://www.namics.ch/"));
+entries.push(new Link(2, "30th Chaos Communication Congress", "danilo", "https://events.ccc.de/congress/2013/wiki/Main_Page"));
+
+// Default comments
+var comment = new Comment(0, "Naaaaja...", "chrigi");
 comments.push(comment);
 entries[0].comments.push(comment);
 
-//default user
+// Default users
 users.push(new User(0, "chrigi", "foobar") );
 users.push(new User(1, "danilo", "foo") );
 users.push(new User(2, "jonas", "bar") );
@@ -117,11 +121,9 @@ app.get('/users', function (req, res) {
 });
 
 
-
 app.get('/entries', function (req, res) {
     res.json(entries);
 });
-
 
 app.post('/entries', function(req, res) {
     var newLink = new Link(entries.length, req.body.title, users[req.session.user_id].name, req.body.url);
@@ -181,7 +183,9 @@ app.post('/logout', function (req, res) {
 
 app.use('/', express.static(__dirname + '/../client/'));
 
-//socket:
+
+// Socket
+
 io = io.listen(app.listen(process.env.PORT || 8000));
 
 io.sockets.on('connection', function (socket) {
