@@ -1,0 +1,122 @@
+#userform input {
+    display: inline-block;
+}
+
+/* OLD STUFF */
+
+.hidden {
+    display: none;
+}
+
+.voteContainer {
+    float: left;
+    padding: 10px;
+    width: 100px;
+}
+
+.postContainer .postLink {
+    display: block;
+    color: black;
+}
+
+.postContainer .postLink:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.voteContainer .voteButton {
+    height: 40px;
+    background-size: 40px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.voteContainer .voteButton:hover {
+    opacity: 0.7;
+}
+
+.voteContainer .voteButton > span {
+    display: none;
+}
+.voteContainer .up {
+    background-image: url('../img/upvote.png?ln=images');
+}
+
+.voteContainer .down {
+    background-image: url('../img/downvote.png?ln=images');
+}
+
+.commentIconBig {
+    font-size: 40px;
+}
+
+.commentTextarea {
+
+}
+
+.postCommentButton {
+    margin: 10px 0 10px 0;
+    float:right;
+}
+
+.commentsTitle {
+    margin: 80px 0 0 80px;
+}
+
+.addCommentContainer {
+    margin: 80px 0 0 0;
+    padding: 0 0 20px 0;
+    background-color: #ddd;
+}
+
+.replyContainer {
+    padding: 10px;
+    margin-left: 90px;
+    clear: both;
+}
+
+.post {
+    clear: both;
+    border-top: 1px solid #ddd;
+    padding-bottom: 50px;
+}
+
+.comment > .comment {
+    margin-left: 80px;
+}
+
+.comment.level-1 {
+    margin-left: 0;
+}
+.comment.level-2 {
+    margin-left: 80px;
+}
+.comment.level-3 {
+    margin-left: 160px;
+}
+.comment.level-4 {
+    margin-left: 240px;
+}
+.comment.level-5 {
+    margin-left: 320px;
+}
+.comment.level-6 {
+    margin-left: 400px;
+}
+.comment.level-7 {
+    margin-left: 480px;
+}
+
+.commentTextContainer {
+    padding-top: 20px;
+}
+
+.addPostForm {
+    padding-top: 10px;
+}
+
+.cloudIconBig {
+    font-size: 60px;
+    padding-top: 6px;
+}
