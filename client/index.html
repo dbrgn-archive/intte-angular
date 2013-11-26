@@ -77,9 +77,12 @@
     <div class="jumbotron">
         <div class="container" id="content">
             <h1>Alle Posts</h1>
-            <h3><strong>Hallo, {{name}}!</strong></h3>
-            <p>In dieser Liste sind alle Posts die verfügbar sind!
-            Bitte anmelden um alle Funktionen nutzen zu können.</p>
+            <h3>
+                <strong data-ng-show="!is_logged_in()">Hallo, Fremder!</strong>
+                <strong data-ng-show="is_logged_in()">Hallo, {{ username }}!</strong>
+            </h3>
+            <p>In dieser Liste sind alle Posts die verfügbar sind!</p>
+            <p data-ng-show="!is_logged_in()">Bitte anmelden um alle Funktionen nutzen zu können.</p>
             <p>chrigi:foobar<br/>danilo:foo<br/>jonas:bar</p>
         </div>
     </div>

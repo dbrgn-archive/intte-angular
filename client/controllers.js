@@ -1,12 +1,12 @@
 // AngularJS controllers
 
-angular.module('hasglaese').controller('MainCtrl', function($scope, $http, Restangular) {
+angular.module('hasglaese').controller('MainCtrl', function($scope, $rootScope, $http, Restangular) {
     // Username
-    $scope.username = null;
+    $rootScope.username = null;
 
     // User functions
     $scope.is_logged_in = function() {
-        return !!$scope.username;
+        return !!$rootScope.username;
     }
 
     // Login function
@@ -18,7 +18,7 @@ angular.module('hasglaese').controller('MainCtrl', function($scope, $http, Resta
             if (response.data != "true") {
                 alert('Login failed.');
             } else {
-                $scope.username = $scope.input_username;
+                $rootScope.username = $scope.input_username;
                 $scope.input_password = '';
             }
         }, function(reason) {
@@ -32,7 +32,7 @@ angular.module('hasglaese').controller('MainCtrl', function($scope, $http, Resta
             if (response.data != "true") {
                 alert('Logout failed.');
             } else {
-                $scope.username = null;
+                $rootScope.username = null;
             }
         }, function(reason) {
             alert('Failed: ' + reason.data + " (status " + reason.status + ")");
