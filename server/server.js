@@ -58,8 +58,7 @@ function findUser(name)
     for (var i in users)
     {
        var user = users[i];
-       if( user.name == name)
-       {
+       if (user.name == name) {
            return user;
        }
     }
@@ -119,7 +118,6 @@ app.post('/register', function(req, res) {
 app.get('/users', function (req, res) {
     res.json(users);
 });
-
 
 app.get('/entries', function (req, res) {
     res.json(entries);

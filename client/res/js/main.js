@@ -1,5 +1,5 @@
 // Configure Angular module
-//
+
 angular.module('hasglaese.service', []);
 angular.module('hasglaese.directive', []);
 angular.module('hasglaese.filter', []);
