@@ -2,6 +2,6 @@
 
 angular.module('hasglaese').filter('timeAgo', function() {
     return function(date) {
-        return moment(date).fromNow();
+        return moment(date).lang('de').fromNow();
     }
 });

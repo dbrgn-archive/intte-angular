@@ -87,7 +87,7 @@
                         <h2 class="postTitle">{{ entry.title }}</h2>
 
                         <div class="postInfo">
-                            <span class="postTime">{{ entry.createTime | timeAgo }} </span> von
+                            <span class="postTime" title="{{ entry.createTimeDisplay }}">{{ entry.createTime | timeAgo }} </span> von
                             <span class="postUser">{{ entry.author }}</span>
                         </div>
                         <p class="comments">
