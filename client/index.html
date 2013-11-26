@@ -7,15 +7,18 @@
     <title>Has Gläse</title>
 
     <!-- Vendor JS -->
+    <!-- TODO: Load asynchronously -->
     <script src="res/js/vendor/jquery-1.10.2.min.js"></script>
     <script src="res/js/vendor/bootstrap.min.js"></script>
     <script src="res/js/vendor/angular.min.js"></script>
     <script src="res/js/vendor/underscore.min.js"></script>
     <script src="res/js/vendor/restangular.min.js"></script>
+    <script src="res/js/vendor/moment-with-langs.min.js"></script>
 
     <!-- Own JS -->
     <script src="res/js/main.js"></script>
     <script src="res/js/controllers.js"></script>
+    <script src="res/js/filters.js"></script>
 
     <link rel="stylesheet" href="res/css/bootstrap.min.css">
     <link rel="stylesheet" href="res/css/jumbotron.css">
@@ -84,7 +87,7 @@
                         <h2 class="postTitle">{{ entry.title }}</h2>
 
                         <div class="postInfo">
-                            <span class="postTime">34 Sekunde(n)  </span> von
+                            <span class="postTime">{{ entry.createTime | timeAgo }} </span> von
                             <span class="postUser">{{ entry.author }}</span>
                         </div>
                         <p class="comments">
