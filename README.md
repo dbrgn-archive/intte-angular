@@ -9,4 +9,9 @@ Setup
     <packagemanager> install nodejs
     cd server
     npm install
-    node server.js
+
+Start app
+---------
+
+    node server/server.js
+    chromium http://localhost:8000/

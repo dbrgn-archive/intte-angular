@@ -170,10 +170,10 @@ app.post('/logout', function (req, res) {
 	res.json(true);
 });
 
-app.use('/', express.static(__dirname + '/public/'));
+app.use('/', express.static(__dirname + '/../client/'));
 
 //socket:
-io = io.listen(app.listen(process.env.PORT || 4730));
+io = io.listen(app.listen(process.env.PORT || 8000));
 
 io.sockets.on('connection', function (socket) {
     socket.emit('message', { action: 'connected' });
