@@ -7,5 +7,6 @@ angular.module('hasglaese', [
     'hasglaese.service',
     'hasglaese.directive',
     'hasglaese.filter',
-    'restangular'
+    'restangular',
+    'angularLocalStorage',
 ]);

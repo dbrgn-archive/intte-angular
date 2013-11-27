@@ -1,8 +1,13 @@
 // AngularJS controllers
 
-angular.module('hasglaese').controller('MainCtrl', function($scope, $rootScope, $http, Restangular) {
+angular
+.module('hasglaese')
+.controller('MainCtrl', function($scope, $rootScope, $http, Restangular, storage) {
     // Username
     $rootScope.username = null;
+
+    // Bind username to local storage
+    storage.bind($rootScope, 'username', {defaultValue: null, storeName: 'hasGlaeseUsername'});
 
     // User functions
     $scope.is_logged_in = function() {
