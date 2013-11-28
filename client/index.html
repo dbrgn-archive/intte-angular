@@ -95,9 +95,9 @@
         <div class="row" data-ng-repeat="entry in entries | orderBy:'-rating.value'">
             <div class="post">
                 <div class="voteContainer">
-                    <div class="voteButton up"><span>upvote</span></div>
+                    <div class="voteButton up" data-ng-click="entry.upvote()"><span>upvote</span></div>
                     <div class="postScore text-center"><span>{{ entry.rating.value }}</span></div>
-                    <div class="voteButton down"><span>downvote</span></div>
+                    <div class="voteButton down" data-ng-click="entry.downvote()"><span>downvote</span></div>
                 </div>
                 <div class="postContainer">
                     <a href="#" class="postLink">
