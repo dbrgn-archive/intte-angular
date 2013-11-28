@@ -2,7 +2,7 @@
 
 var app = angular.module('hasglaese');
 
-app.controller('MainCtrl', function($scope, $rootScope, $http, entryFactory, storage) {
+app.controller('MainCtrl', function($scope, $rootScope, $http, entryFactory, storage, socket) {
     // Username
     $rootScope.username = null;
 
@@ -44,8 +44,22 @@ app.controller('MainCtrl', function($scope, $rootScope, $http, entryFactory, sto
         });
     }
 
-    // Factories
-    entryFactory.getEntries().then(function(entries) {
-        $scope.entries = entries;
+    // Entries
+    function getEntries() {
+        entryFactory.getEntries().then(function(entries) {
+            $scope.entries = entries;
+        });
+    }
+    getEntries();
+
+    // Websockets
+    socket.on('Rated', function(message) {
+        getEntries();
+    });
+    socket.on('AddLink', function(message) {
+        getEntries();
+    });
+    socket.on('AddComment', function(message) {
+        getEntries();
     });
 });

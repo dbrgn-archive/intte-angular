@@ -11,3 +11,21 @@ app.factory('entryFactory', function(Restangular) {
 
     return factory;
 });
+
+app.factory('socket', function($rootScope) {
+    var socket = io.connect();
+    socket.on('disconnect', function() {
+        alert('Websocket connection lost.');
+    });
+    return {
+        on: function(eventName, callback) {
+            socket.on("message", function(message) {
+                var action = message.action;
+                if (action == eventName) {
+                    console.log("New message: " + action);
+                    callback();
+                }
+            });
+        }
+    }
+});
