@@ -20,12 +20,17 @@ app.factory('socket', function($rootScope) {
     return {
         on: function(eventName, callback) {
             socket.on("message", function(message) {
+                console.log(message);
                 var action = message.action;
                 if (action == eventName) {
                     console.log("New message: " + action);
                     callback();
                 }
             });
+        },
+        rawSocket: socket,
+        removeAllListeners: function() {
+            socket.removeAllListeners();
         }
     }
 });

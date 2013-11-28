@@ -192,9 +192,11 @@ app.use('/', express.static(__dirname + '/../client/'));
 io = io.listen(app.listen(process.env.PORT || 8000));
 
 io.sockets.on('connection', function (socket) {
-    socket.emit('message', { action: 'connected' });
-});
+    io.sockets.emit('usercount', { count: io.sockets.clients().length });
 
-io.sockets.on('disconnect', function (socket) {
-    socket.emit('message', { action: 'disconnect' });
+    socket.on('disconnect', function () {
+        setTimeout(function() {
+            io.sockets.emit('usercount', { count: io.sockets.clients().length });
+        }, 100); // Wait for connection to actually end
+    });
 });

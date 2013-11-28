@@ -3,8 +3,9 @@
 var app = angular.module('hasglaese');
 
 app.controller('MainCtrl', function($scope, $rootScope, $http, entryFactory, storage, socket) {
-    // Username
+    // Variables
     $rootScope.username = null;
+    $rootScope.usercount = 0;
 
     // Bind username to local storage
     storage.bind($rootScope, 'username', {defaultValue: null, storeName: 'hasGlaeseUsername'});
@@ -61,5 +62,16 @@ app.controller('MainCtrl', function($scope, $rootScope, $http, entryFactory, sto
     });
     socket.on('AddComment', function(message) {
         getEntries();
+    });
+    socket.rawSocket.on('usercount', function(message) {
+        console.log('New usercount: ' + message.count);
+        $scope.$apply(function() {
+            $scope.usercount = message.count;
+        });
+    });
+
+    // Destructor
+    $scope.$on('$destroy', function(event) {
+        socket.removeAllListeners();
     });
 });
