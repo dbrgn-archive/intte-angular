@@ -53,6 +53,11 @@ users.push(new User(0, "chrigi", "foobar") );
 users.push(new User(1, "danilo", "foo") );
 users.push(new User(2, "jonas", "bar") );
 
+// Default votes
+entries[0].rating._down(0)
+entries[1].rating._up(2)
+entries[1].rating._up(1)
+
 function findUser(name)
 {
     for (var i in users)
