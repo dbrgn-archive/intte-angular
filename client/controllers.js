@@ -1,8 +1,8 @@
 // AngularJS controllers
 
-angular
-.module('hasglaese')
-.controller('MainCtrl', function($scope, $rootScope, $http, Restangular, storage) {
+var app = angular.module('hasglaese');
+
+app.controller('MainCtrl', function($scope, $rootScope, $http, entryFactory, storage) {
     // Username
     $rootScope.username = null;
 
@@ -44,9 +44,8 @@ angular
         });
     }
 
-    // Get all entries
-    Restangular.all('entries').getList().then(function(entries) {
+    // Factories
+    entryFactory.getEntries().then(function(entries) {
         $scope.entries = entries;
     });
-
 });
