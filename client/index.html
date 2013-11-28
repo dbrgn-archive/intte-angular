@@ -90,7 +90,7 @@
     </div>
 
     <div class="container">
-        <div class="row" data-ng-repeat="entry in entries">
+        <div class="row" data-ng-repeat="entry in entries | orderBy:'-rating.value'">
             <div class="post">
                 <div class="voteContainer">
                     <div class="voteButton up"><span>upvote</span></div>
