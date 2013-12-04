@@ -1,0 +1,44 @@
+<div class="jumbotron">
+    <div class="container" id="content">
+        <h1>Alle Posts</h1>
+
+        <h3>
+            <strong data-ng-show="!is_logged_in()">Hallo, Fremder!</strong>
+            <strong data-ng-show="is_logged_in()">Hallo, {{ username }}!</strong>
+        </h3>
+
+        <p>In dieser Liste sind alle Posts die verfügbar sind!</p>
+
+        <p data-ng-show="!is_logged_in()">Bitte anmelden um alle Funktionen nutzen zu können.</p>
+
+        <p data-ng-show="!is_logged_in()">chrigi:foobar<br/>danilo:foo<br/>jonas:bar</p>
+
+        <p>Aktuell sind {{ usercount }} Benutzer mit dieser Website verbunden.</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row" data-ng-repeat="entry in entries | orderBy:'-rating.value'">
+        <div class="post">
+            <div class="voteContainer">
+                <div class="voteButton up" data-ng-click="entry.upvote()"><span>upvote</span></div>
+                <div class="postScore text-center"><span>{{ entry.rating.value }}</span></div>
+                <div class="voteButton down" data-ng-click="entry.downvote()"><span>downvote</span></div>
+            </div>
+            <div class="postContainer">
+                <a href="#detail/{{entry.id}}" class="postLink">
+                    <h2 class="postTitle">{{ entry.title }}</h2>
+
+                    <div class="postInfo">
+                    <span class="postTime"
+                          title="{{ entry.createTimeDisplay }}">{{ entry.createTime | timeAgo }} </span> von
+                        <span class="postUser">{{ entry.author }}</span>
+                    </div>
+                    <p class="comments">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        <span>{{ entry.comments.length }} Kommentar(e)</span>
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

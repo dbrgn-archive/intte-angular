@@ -1,0 +1,129 @@
+<div class="jumbotron">
+    <div class="container" id="content">
+        <h1>Post Detail</h1>
+
+        <h3>
+            <strong data-ng-show="!is_logged_in()">Hallo, Fremder!</strong>
+            <strong data-ng-show="is_logged_in()">Hallo, {{ username }}!</strong>
+        </h3>
+
+        <p data-ng-show="!is_logged_in()">Bitte anmelden um alle Funktionen nutzen zu können.</p>
+
+        <p data-ng-show="!is_logged_in()">chrigi:foobar<br/>danilo:foo<br/>jonas:bar</p>
+
+        <p>Aktuell sind {{ usercount }} Benutzer mit dieser Website verbunden.</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row posts">
+        <div class="voteContainer">
+        <span>
+            <div class="voteButton up" data-ng-click="entry_detail.upvote()">
+                <span>upvote</span>
+            </div>
+        </span>
+
+            <div class="postScore text-center">
+            <span>
+                <span>
+                    {{ entry_detail.rating.value }}
+                </span>
+            </span>
+            </div>
+        <span>
+            <div class="voteButton down" data-ng-click="entry_detail.downvote()">
+                <span>downvote</span>
+            </div>
+        </span>
+        </div>
+
+        <div class="postContainer">
+            <h2>{{ entry_detail.title }} </h2>
+
+            <p class="postUrl">
+                <a href="http://www.sbb.ch"> {{ entry_detail.url }}</a>
+            </p>
+
+            <div class="postInfo">
+                <span class="postTime">{{ entry_detail.createTime | timeAgo }}</span>
+                von <span class="postUser">{{ entry_detail.author }}</span>
+            </div>
+            <p class="comments">
+                <span class="glyphicon glyphicon-comment"></span>
+            <span>
+                {{ entry_detail.comments.length }} Kommentar(e)
+            </span>
+            </p>
+        </div>
+    </div>
+
+
+    <!-- ***** ADD COMMENT ***** -->
+    <div class="row addCommentContainer" data-ng-show="!is_logged_in()">
+        <div class="col-md-12">
+            <h2>{{ entry_detail.comments.length }} Kommentar(e)</h2>
+        </div>
+    </div>
+
+
+    <div class="row addCommentContainer" data-ng-show="is_logged_in()">
+        <div class="col-md-12">
+            <h2>{{ entry_detail.comments.length }} Kommentar(e)</h2>
+
+            <div class="row">
+                <div class="col-md-1">
+                    <span class="glyphicon glyphicon-comment commentIconBig"></span>
+                </div>
+                <div class="col-md-6">
+                    <textarea class="commentTextarea form-control" data-ng-model="comment_input"></textarea>
+                    <input type="submit" name="j_idt52:j_idt56" value="Kommentar Posten"
+                           class="btn btn-primary postCommentButton" data-ng-click="post_comment()">
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+
+    <div class="row commentsList">
+        <table class="table">
+            <tbody data-ng-repeat="comment in entry_detail.comments">
+            <tr>
+                <td>
+                    <div class="comment level-1">
+                        <div class="voteContainer">
+                    <span>
+                        <div class="voteButton up" data-ng-click="comment.upvote()">
+                            <span>upvote</span>
+                        </div>
+                    </span>
+
+                            <div class="postScore text-center">
+                        <span>
+                            <span>
+                                {{ comment.rating.value }}
+                            </span>
+                        </span>
+                            </div>
+                    <span>
+                <div class="voteButton down" data-ng-click="comment.downvote()">
+                    <span>downvote</span></div></span>
+                        </div>
+                        <div class="commentTextContainer">
+                            <p>
+                            <span>
+                                {{ comment.createTime | timeAgo}} von {{ comment.author }}
+                            </span>
+                            </p>
+
+                            <p>
+                                {{ comment.text }}
+                            </p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

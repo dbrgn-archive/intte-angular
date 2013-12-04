@@ -2,24 +2,33 @@
 
 var app = angular.module('hasglaese');
 
-app.factory('entryFactory', function(Restangular) {
+app.factory('entryFactory', function (Restangular) {
     var factory = {};
 
-    factory.getEntries = function() {
+    factory.getEntries = function () {
         return Restangular.all('entries').getList();
     };
 
     return factory;
 });
 
-app.factory('socket', function($rootScope) {
+app.factory('entryDetailFactory', function (Restangular) {
+    var factory = {};
+    factory.getEntryDetails = function (id) {
+        return Restangular.one('entries', id).get();
+    }
+
+    return factory;
+});
+
+app.factory('socket', function ($rootScope) {
     var socket = io.connect();
-    socket.on('disconnect', function() {
+    socket.on('disconnect', function () {
         alert('Websocket connection lost.');
     });
     return {
-        on: function(eventName, callback) {
-            socket.on("message", function(message) {
+        on: function (eventName, callback) {
+            socket.on("message", function (message) {
                 console.log(message);
                 var action = message.action;
                 if (action == eventName) {
@@ -29,7 +38,7 @@ app.factory('socket', function($rootScope) {
             });
         },
         rawSocket: socket,
-        removeAllListeners: function() {
+        removeAllListeners: function () {
             socket.removeAllListeners();
         }
     }

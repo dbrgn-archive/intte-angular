@@ -1,8 +1,8 @@
 // AngularJS controllers
 
-var app = angular.module('hasglaese');
+var app = angular.module('controllers', []);
 
-app.controller('MainCtrl', function($scope, $rootScope, $http, entryFactory, storage, socket) {
+app.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, storage, socket) {
     // Variables
     $rootScope.username = null;
     $rootScope.usercount = 0;
@@ -11,67 +11,87 @@ app.controller('MainCtrl', function($scope, $rootScope, $http, entryFactory, sto
     storage.bind($rootScope, 'username', {defaultValue: null, storeName: 'hasGlaeseUsername'});
 
     // User functions
-    $scope.is_logged_in = function() {
+    $rootScope.is_logged_in = function () {
         return !!$rootScope.username;
     }
 
+
     // Login function
-    $scope.login = function() {
+    $scope.login = function () {
         $http.post('/login', {
             'name': $scope.input_username,
             'password': $scope.input_password
-        }).then(function(response) {
-            if (response.data != "true") {
-                alert('Login failed.');
-            } else {
-                $rootScope.username = $scope.input_username;
-                $scope.input_password = '';
-            }
-        }, function(reason) {
-            alert('Failed: ' + reason.data + " (status " + reason.status + ")");
-        });
+        }).then(function (response) {
+                if (response.data != "true") {
+                    alert('Login failed.');
+                } else {
+                    $rootScope.username = $scope.input_username;
+                    $scope.input_password = '';
+                }
+            }, function (reason) {
+                alert('Failed: ' + reason.data + " (status " + reason.status + ")");
+            });
     }
 
     // Logout function
-    $scope.logout = function() {
-        $http.post('/logout').then(function(response) {
+    $scope.logout = function () {
+        $http.post('/logout').then(function (response) {
             if (response.data != "true") {
                 alert('Logout failed.');
             } else {
                 $rootScope.username = null;
             }
-        }, function(reason) {
+        }, function (reason) {
             alert('Failed: ' + reason.data + " (status " + reason.status + ")");
         });
     }
 
-    // Entries
+    // EntriesgetEntries
     function getEntries() {
-        entryFactory.getEntries().then(function(entries) {
+        entryFactory.getEntries().then(function (entries) {
             $scope.entries = entries;
         });
     }
+
     getEntries();
 
     // Websockets
-    socket.on('Rated', function(message) {
+    socket.on('Rated', function (message) {
         getEntries();
     });
-    socket.on('AddLink', function(message) {
+    socket.on('AddLink', function (message) {
         getEntries();
     });
-    socket.on('AddComment', function(message) {
+    socket.on('AddComment', function (message) {
         getEntries();
     });
-    socket.rawSocket.on('usercount', function(message) {
+    socket.rawSocket.on('usercount', function (message) {
         console.log('New usercount: ' + message.count);
-        $scope.$apply(function() {
+        $scope.$apply(function () {
             $scope.usercount = message.count;
         });
     });
 
     // Destructor
-    $scope.$on('$destroy', function(event) {
+    $scope.$on('$destroy', function (event) {
         socket.removeAllListeners();
     });
+});
+
+app.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entryDetailFactory) {
+
+    function getEntryDetails() {
+        entryDetailFactory.getEntryDetails($routeParams.id).then(function (entry_detail) {
+            $scope.entry_detail = entry_detail;
+        })
+    }
+
+    getEntryDetails();
+
+    $scope.comment_input = "";
+
+    $scope.post_comment = function post_comment() {
+        <!-- TODO send comment -->
+        $scope.comment_input = "";
+    }
 });
