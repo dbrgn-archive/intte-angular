@@ -30,7 +30,8 @@ Endpoints:
     /entries/:id GET
     /entries/:id/up POST
     /entries/:id/down POST
-    /entries/:id/comment POST
+    /entries/:id/comments POST
+    /entries/:id/comments GET
     /comments/:id POST
     /comments/:id/up POST
     /comments/:id/down POST
