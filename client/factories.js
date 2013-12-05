@@ -4,7 +4,6 @@ var app = angular.module('hasglaese');
 
 app.factory('entryFactory', function (Restangular) {
     var factory = {};
-
     factory.getEntries = function () {
         return Restangular.all('entries').getList();
     };
@@ -16,6 +15,15 @@ app.factory('entryDetailFactory', function (Restangular) {
     var factory = {};
     factory.getEntryDetails = function (id) {
         return Restangular.one('entries', id).get();
+    }
+
+    return factory;
+});
+
+app.factory('commentFactory', function (Restangular) {
+    var factory = {};
+    factory.entryComments = function (id) {
+        return Restangular.one('entries', id).getList('comments');
     }
 
     return factory;

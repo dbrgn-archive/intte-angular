@@ -78,7 +78,13 @@ app.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, st
     });
 });
 
-app.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entryDetailFactory) {
+app.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entryDetailFactory, commentFactory, socket, $http) {
+
+    function entryComments() {
+        commentFactory.entryComments($routeParams.id).then(function (comments) {
+            $scope.comments = comments;
+        })
+    }
 
     function getEntryDetails() {
         entryDetailFactory.getEntryDetails($routeParams.id).then(function (entry_detail) {
@@ -86,12 +92,26 @@ app.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entryD
         })
     }
 
+
     getEntryDetails();
+    entryComments();
 
     $scope.comment_input = "";
 
-    $scope.post_comment = function post_comment() {
+    // Websockets
+    socket.on('Rated', function (message) {
+        getEntryDetails();
+        entryComments();
+    });
+
+    socket.on('AddComment', function (message) {
+        getEntryDetails();
+        entryComments();
+    });
+
+    $scope.post_comment = function post_comment(text) {
         <!-- TODO send comment -->
+        $scope.entry_detail.post('comments', {'text': text});
         $scope.comment_input = "";
     }
 });
