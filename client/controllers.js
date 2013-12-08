@@ -1,6 +1,6 @@
 // AngularJS controllers
 
-var app = angular.module('controllers', []);
+var app = angular.module('hasglaese.controllers', []);
 
 app.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, storage, socket) {
     // Variables

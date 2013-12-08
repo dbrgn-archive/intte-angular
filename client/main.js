@@ -7,10 +7,10 @@ var hasglaeseApp = angular.module('hasglaese', [
     'hasglaese.service',
     'hasglaese.directive',
     'hasglaese.filter',
+    'hasglaese.controllers',
     'restangular',
     'angularLocalStorage',
-    'ngRoute',
-    'controllers'
+    'ngRoute'
 ]);
 
 hasglaeseApp.config(['$routeProvider', function ($routeProvider) {
