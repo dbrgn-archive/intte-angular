@@ -3,6 +3,7 @@
 var app = angular.module('hasglaese');
 
 app.config(function (RestangularProvider) {
+    RestangularProvider.setParentless(['comments']);
 
     RestangularProvider.addElementTransformer('entries', false, function (entries) {
         entries.addRestangularMethod('upvote', 'post', 'up');
