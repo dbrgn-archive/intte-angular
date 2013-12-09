@@ -1,6 +1,6 @@
 // AngularJS controllers
 
-var ctrl = angular.module('hasglaese.controllers', []);
+var ctrl = angular.module('controllers', []);
 
 ctrl.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, storage, socket) {
     // Variables
@@ -110,7 +110,6 @@ ctrl.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entry
     });
 
     $scope.post_comment = function post_comment(text) {
-        <!-- TODO send comment -->
         $scope.entry_detail.post('comments', {'text': text});
         $scope.comment_input = "";
     }
@@ -124,8 +123,7 @@ app.controller('NewPostCtrl', function ($scope, $http, $location) {
                     'title': $scope.newPost.title,
                     'url': $scope.newPost.URL
                 }).then(function () {
-                    alert('saved!');
-                    $location.url('index.html');
+                    $location.url('/index.html');
                 })
         }
     };
