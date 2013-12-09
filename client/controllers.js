@@ -115,3 +115,18 @@ app.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entryD
         $scope.comment_input = "";
     }
 });
+
+app.controller('NewPostCtrl', function ($scope, $http, $location) {
+    $scope.addPost = function (post) {
+        if ($scope.form.$valid) {
+            $http.post('/entries',
+                {
+                    'title': $scope.newPost.title,
+                    'url': $scope.newPost.URL
+                }).then(function () {
+                    alert('saved!');
+                    $location.url('index.html');
+                })
+        }
+    };
+});

@@ -1,0 +1,85 @@
+<div class="jumbotron">
+    <div class="container" id="content">
+        <h1>
+            Post hinzufügen
+        </h1>
+
+        <p>Stärke die Community in dem Du einen Post hinzufügst, sei ein Held!
+        </p>
+    </div>
+</div>
+
+<div class="container" data-ng-show="!is_logged_in()">
+
+    <div class="row addPostContainer">
+        <div class="col-md-1">
+            <span class="glyphicon glyphicon-cloud cloudIconBig"></span>
+        </div>
+        <div class="col-md-4">
+            <h1>Posten deinen Link!</h1>
+
+            <p>Poste deinen Link und teile die grossartigen weiten des Internets mit der Community!</p>
+        </div><span class="col-md-6 addPostForm">
+                <div class="alert alert-warning">Bitte einloggen!</div></span>
+    </div>
+</div>
+
+
+<div class="container" data-ng-show="is_logged_in()">
+    <div class="row addPostContainer">
+        <div class="col-md-1">
+            <span class="glyphicon glyphicon-cloud cloudIconBig"></span>
+        </div>
+        <div class="col-md-4">
+            <h1>Posten deinen Link!</h1>
+
+            <p>Poste deinen Link und teile die grossartigen weiten des Internets mit der Community!</p>
+        </div><span class="col-md-6 addPostForm">
+
+        <form class="form-horizontal" name="form" novalidate>
+            <!-- title row -->
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <input id="title" name="title" type="text" placeholder="Titel" data-ng-model="newPost.title"
+                           data-ng-minlength="3" required
+                           class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <div aria-live="polite" class="errorMessage"
+                         data-ng-show="form.title.$dirty && form.title.$invalid">
+                        Ungültige Eingabe!
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL row -->
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <input id="URL" name="URL" type="url" placeholder="URL" data-ng-model="newPost.URL"
+                           data-ng-pattern="/http://\w*\.\w*\.\w{2,5}/" required class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <div aria-live="polite" class="errorMessage"
+                         data-ng-show="form.URL.$dirty && form.URL.$invalid">
+                        Ungültige Eingabe!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <button ng-disabled="form.$invalid" ng-click="addPost(newPost)" type="submit" value="Senden"
+                            class="btn btn-primary">Speichern
+                    </button>
+                </div>
+            </div>
+        </form>
+    </span>
+    </div>
+</div>

@@ -23,6 +23,11 @@ hasglaeseApp.config(['$routeProvider', function ($routeProvider) {
         {
             templateUrl: 'partials/detail.html',
             controller: 'DetailCtrl'
+        }).when('/new_post',
+        {
+            templateUrl: 'partials/new_post.html',
+            controller: 'NewPostCtrl'
+
         }).
         otherwise({
             redirectTo: '/'
