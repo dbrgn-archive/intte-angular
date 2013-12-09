@@ -1,8 +1,8 @@
 // AngularJS controllers
 
-var app = angular.module('controllers', []);
+var ctrl = angular.module('hasglaese.controllers', []);
 
-app.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, storage, socket) {
+ctrl.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, storage, socket) {
     // Variables
     $rootScope.username = null;
     $rootScope.usercount = 0;
@@ -78,7 +78,7 @@ app.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, st
     });
 });
 
-app.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entryDetailFactory, commentFactory, socket, $http) {
+ctrl.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entryDetailFactory, commentFactory, socket, $http) {
 
     function entryComments() {
         commentFactory.entryComments($routeParams.id).then(function (comments) {
