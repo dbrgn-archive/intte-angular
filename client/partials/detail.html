@@ -3,6 +3,7 @@
         <h1>Post Detail</h1>
 
         <p data-ng-show="!is_logged_in()">Bitte anmelden um alle Funktionen nutzen zu können.</p>
+
         <p data-ng-show="!is_logged_in()">chrigi:foobar<br/>danilo:foo<br/>jonas:bar</p>
 
         <p>Zurück zur <a href="#/">Übersicht</a>?</p>
@@ -35,7 +36,7 @@
             <h2>{{ entry_detail.title }} </h2>
 
             <p class="postUrl">
-                <a href="http://www.sbb.ch"> {{ entry_detail.url }}</a>
+                <a href="{{ entry_detail.url }}"> {{ entry_detail.url }}</a>
             </p>
 
             <div class="postInfo">
