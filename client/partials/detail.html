@@ -2,16 +2,10 @@
     <div class="container" id="content">
         <h1>Post Detail</h1>
 
-        <h3>
-            <strong data-ng-show="!is_logged_in()">Hallo, Fremder!</strong>
-            <strong data-ng-show="is_logged_in()">Hallo, {{ username }}!</strong>
-        </h3>
-
         <p data-ng-show="!is_logged_in()">Bitte anmelden um alle Funktionen nutzen zu können.</p>
-
         <p data-ng-show="!is_logged_in()">chrigi:foobar<br/>danilo:foo<br/>jonas:bar</p>
 
-        <p>Aktuell sind {{ usercount }} Benutzer mit dieser Website verbunden.</p>
+        <p>Zurück zur <a href="#/">Übersicht</a>?</p>
     </div>
 </div>
 <div class="container">

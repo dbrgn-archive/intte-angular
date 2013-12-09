@@ -10,7 +10,6 @@
         <p>In dieser Liste sind alle Posts die verfügbar sind!</p>
 
         <p data-ng-show="!is_logged_in()">Bitte anmelden um alle Funktionen nutzen zu können.</p>
-
         <p data-ng-show="!is_logged_in()">chrigi:foobar<br/>danilo:foo<br/>jonas:bar</p>
 
         <p>Aktuell sind {{ usercount }} Benutzer mit dieser Website verbunden.</p>
@@ -25,7 +24,7 @@
                 <div class="voteButton down" data-ng-click="entry.downvote()"><span>downvote</span></div>
             </div>
             <div class="postContainer">
-                <a href="#detail/{{entry.id}}" class="postLink">
+                <a href="#/detail/{{entry.id}}" class="postLink">
                     <h2 class="postTitle">{{ entry.title }}</h2>
 
                     <div class="postInfo">
