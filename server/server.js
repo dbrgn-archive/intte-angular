@@ -101,6 +101,16 @@ app.post('/login', function (req, res) {
     res.json(false);
 });
 
+app.get('/users/check/:name', function (req, res) {
+    if (findUser(req.params.name)) {
+        res.json(true);
+    }
+    else {
+        res.json(false);
+    }
+
+});
+
 app.post('/register', function (req, res) {
     var post = req.body;
 

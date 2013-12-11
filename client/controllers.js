@@ -128,3 +128,19 @@ app.controller('NewPostCtrl', function ($scope, $http, $location) {
         }
     };
 });
+
+app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $location) {
+    $scope.register = function (registerData) {
+        $http.post('/register',
+            {
+                'name': registerData.name,
+                'password': registerData.password
+            }
+        ).then(function (response) {
+                if (response.data == "true") {
+                    $location.url('/index.html')
+                }
+            })
+    };
+
+});
