@@ -129,7 +129,7 @@ app.controller('NewPostCtrl', function ($scope, $http, $location) {
     };
 });
 
-app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $location) {
+app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $location, $window) {
     $scope.register = function (registerData) {
         $http.post('/register',
             {
@@ -138,7 +138,7 @@ app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $location) {
             }
         ).then(function (response) {
                 if (response.data == "true") {
-                    $location.url('/index.html')
+                    $window.location.href = $rootScope.lastPage;
                 }
             })
     };
