@@ -42,7 +42,6 @@ hasglaeseApp.run(function ($rootScope, $location) {
     $rootScope.lastPage = '';
     $rootScope.$on('$locationChangeStart', function (evt, absNewUrl, absOldUrl) {
         $rootScope.lastPage = absOldUrl;
-        console.log($rootScope.lastPage)
     })
 })
 
