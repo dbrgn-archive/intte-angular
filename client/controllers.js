@@ -2,7 +2,7 @@
 
 var ctrl = angular.module('controllers', []);
 
-ctrl.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, storage, socket) {
+ctrl.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, storage, socket, errorHandler) {
     // Variables
     $rootScope.username = null;
     $rootScope.usercount = 0;
@@ -23,13 +23,13 @@ ctrl.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, s
             'password': $scope.input_password
         }).then(function (response) {
                 if (response.data != "true") {
-                    alert('Login failed.');
+                    errorHandler(null, 'Login failed');
                 } else {
                     $rootScope.username = $scope.input_username;
                     $scope.input_password = '';
                 }
             }, function (reason) {
-                alert('Failed: ' + reason.data + " (status " + reason.status + ")");
+                errorHandler(reason, 'Login failed');
             });
     }
 
@@ -37,12 +37,13 @@ ctrl.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, s
     $scope.logout = function () {
         $http.post('/logout').then(function (response) {
             if (response.data != "true") {
-                alert('Logout failed.');
+                errorHandler(null, 'Logout failed');
             } else {
                 $rootScope.username = null;
+                $scope.input_username = null;
             }
         }, function (reason) {
-            alert('Failed: ' + reason.data + " (status " + reason.status + ")");
+            errorHandler(reason, 'Logout failed');
         });
     }
 
@@ -50,6 +51,8 @@ ctrl.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, s
     function getEntries() {
         entryFactory.getEntries().then(function (entries) {
             $scope.entries = entries;
+        }, function (reason) {
+            errorHandler(reason, 'Failed to get entries');
         });
     }
 
@@ -115,7 +118,7 @@ ctrl.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entry
     }
 });
 
-app.controller('NewPostCtrl', function ($scope, $http, $location) {
+app.controller('NewPostCtrl', function ($scope, $http, $location, errorHandler) {
     $scope.addPost = function (post) {
         if ($scope.form.$valid) {
             $http.post('/entries',
@@ -124,12 +127,12 @@ app.controller('NewPostCtrl', function ($scope, $http, $location) {
                     'url': $scope.newPost.URL
                 }).then(function () {
                     $location.url('/index.html');
-                })
+                }, errorHandler(reason, 'Post failed'))
         }
     };
 });
 
-app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $location, $window) {
+app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $window) {
     $scope.register = function (registerData) {
         $http.post('/register',
             {
@@ -137,10 +140,10 @@ app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $location, $
                 'password': registerData.password
             }
         ).then(function (response) {
-                if (response.data == "true") {
+                if (response.data == 'true') {
                     $window.location.href = $rootScope.lastPage;
                 }
-            })
+            }, errorHandler(reason, 'Register failed'))
     };
 
 });

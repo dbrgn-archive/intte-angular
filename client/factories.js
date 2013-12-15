@@ -51,3 +51,14 @@ app.factory('socket', function ($rootScope) {
         }
     }
 });
+
+app.factory('errorHandler', function () {
+    return function (reason, message) {
+        if (reason != null) {
+            alert('Error: ' + message + ' Details: ' + reason.data + ' (status ' + reason.status + ')');
+        }
+        else {
+            alert('Error: ' + message);
+        }
+    }
+});

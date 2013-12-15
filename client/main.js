@@ -47,4 +47,3 @@ hasglaeseApp.run(function ($rootScope, $location) {
 })
 
 
-
