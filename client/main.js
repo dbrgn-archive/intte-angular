@@ -1,19 +1,13 @@
 // Configure Angular module
 
-angular.module('hasglaese.service', []);
-//angular.module('hasglaese.directive', []);
-angular.module('hasglaese.filter', []);
-var hasglaeseApp = angular.module('hasglaese', [
-    'hasglaese.service',
-    'hasglaese.directive',
-    'hasglaese.filter',
+var app = angular.module('hasglaese', [
+    'controllers',
     'restangular',
     'angularLocalStorage',
-    'ngRoute',
-    'controllers'
+    'ngRoute'
 ]);
 
-hasglaeseApp.config(['$routeProvider', function ($routeProvider) {
+app.config(function ($routeProvider) {
     $routeProvider.when('/',
         {
             templateUrl: 'partials/start.html',
@@ -36,9 +30,9 @@ hasglaeseApp.config(['$routeProvider', function ($routeProvider) {
         otherwise({
             redirectTo: '/'
         });
-}]);
+});
 
-hasglaeseApp.run(function ($rootScope, $location) {
+app.run(function ($rootScope, $location) {
     $rootScope.lastPage = '';
     $rootScope.$on('$locationChangeStart', function (evt, absNewUrl, absOldUrl) {
         $rootScope.lastPage = absOldUrl;

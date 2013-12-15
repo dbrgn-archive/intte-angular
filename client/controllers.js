@@ -118,7 +118,7 @@ ctrl.controller('DetailCtrl', function ($scope, $routeParams, Restangular, entry
     }
 });
 
-app.controller('NewPostCtrl', function ($scope, $http, $location, errorHandler) {
+ctrl.controller('NewPostCtrl', function ($scope, $http, $location, errorHandler) {
     $scope.addPost = function (post) {
         if ($scope.form.$valid) {
             $http.post('/entries',
@@ -134,7 +134,7 @@ app.controller('NewPostCtrl', function ($scope, $http, $location, errorHandler) 
     };
 });
 
-app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $window) {
+ctrl.controller('RegisterCtrl', function ($rootScope, $scope, $http, $window) {
     $scope.register = function (registerData) {
         $http.post('/register',
             {

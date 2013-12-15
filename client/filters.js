@@ -1,6 +1,8 @@
 // AngularJS filters
 
-angular.module('hasglaese').filter('timeAgo', function() {
+var app = angular.module('hasglaese');
+
+app.filter('timeAgo', function () {
     return function(date) {
         return moment(date).lang('de').fromNow();
     }
