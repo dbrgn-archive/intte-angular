@@ -127,7 +127,9 @@ app.controller('NewPostCtrl', function ($scope, $http, $location, errorHandler) 
                     'url': $scope.newPost.URL
                 }).then(function () {
                     $location.url('/index.html');
-                }, errorHandler(reason, 'Post failed'))
+                }, function (reason) {
+                    errorHandler(reason, 'Post failed')
+                })
         }
     };
 });
@@ -143,7 +145,9 @@ app.controller('RegisterCtrl', function ($rootScope, $scope, $http, $window) {
                 if (response.data == 'true') {
                     $window.location.href = $rootScope.lastPage;
                 }
-            }, errorHandler(reason, 'Register failed'))
+            }, function (reason) {
+                errorHandler(reason, 'Register failed')
+            })
     };
 
 });
