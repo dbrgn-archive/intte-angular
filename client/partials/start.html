@@ -30,19 +30,17 @@
                 </div>
             </div>
             <div class="postContainer">
-                <a href="#/detail/{{entry.id}}" class="postLink">
-                    <h2 class="postTitle">{{ entry.title }}</h2>
+                <h2 class="postTitle"><a class="postLink" href="{{ entry.url }}">{{ entry.title }}</a></h2>
 
-                    <div class="postInfo">
+                <div class="postInfo">
                     <span class="postTime"
                           title="{{ entry.createTimeDisplay }}">{{ entry.createTime | timeAgo }} </span> von
                         <span class="postUser">{{ entry.author }}</span>
                     </div>
-                    <p class="comments">
+                    <a class="comments postLink" href="#/detail/{{entry.id}}">
                         <span class="glyphicon glyphicon-comment"></span>
                         <span>{{ entry.comments.length }} Kommentar(e)</span>
-                    </p>
-                </a>
+                    </a>
             </div>
         </div>
     </div>
