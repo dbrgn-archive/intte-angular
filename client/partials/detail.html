@@ -74,7 +74,7 @@
 
     <div class="row commentsList">
         <table class="table">
-            <tbody data-ng-repeat="comment in comments">
+            <tbody data-ng-repeat="comment in comments | orderBy:'-rating.value'">
             <tr>
                 <td>
                     <div class="comment level-1">
