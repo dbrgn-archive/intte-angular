@@ -40,7 +40,6 @@ ctrl.controller('MainCtrl', function ($scope, $rootScope, $http, entryFactory, s
                 errorHandler(null, 'Logout failed');
             } else {
                 $rootScope.username = null;
-                $scope.input_username = null;
             }
         }, function (reason) {
             errorHandler(reason, 'Logout failed');
