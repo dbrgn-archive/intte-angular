@@ -17,3 +17,19 @@ app.directive('ngUnique', function ($http) {
         }
     }
 });
+
+app.directive('voteUp', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/vote_up.html',
+        replace: true
+    }
+});
+
+app.directive('voteDown', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/vote_down.html',
+        replace: true
+    }
+});

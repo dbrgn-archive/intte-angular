@@ -12,24 +12,9 @@
 <div class="container">
     <div class="row posts">
         <div class="voteContainer">
-        <span>
-            <div class="voteButton up" data-ng-click="entry_detail.upvote()">
-                <span>upvote</span>
-            </div>
-        </span>
-
-            <div class="postScore text-center">
-            <span>
-                <span>
-                    {{ entry_detail.rating.value }}
-                </span>
-            </span>
-            </div>
-        <span>
-            <div class="voteButton down" data-ng-click="entry_detail.downvote()">
-                <span>downvote</span>
-            </div>
-        </span>
+            <vote-up></vote-up>
+            <div class="postScore text-center"><span>{{ entry_detail.rating.value }}</span></div>
+            <vote-down></vote-down>
         </div>
 
         <div class="postContainer">
@@ -88,22 +73,15 @@
                 <td>
                     <div class="comment level-1">
                         <div class="voteContainer">
-                    <span>
-                        <div class="voteButton up" data-ng-click="comment.upvote()">
-                            <span>upvote</span>
-                        </div>
-                    </span>
-
-                            <div class="postScore text-center">
-                        <span>
-                            <span>
-                                {{ comment.rating.value }}
-                            </span>
-                        </span>
+                            <div>
+                                <div data-ng-show="is_logged_in()" class="voteButton up" data-ng-click="comment.upvote()" title="Upvote"></div>
+                                <div data-ng-show="!is_logged_in()" class="voteButton"></div>
                             </div>
-                    <span>
-                <div class="voteButton down" data-ng-click="comment.downvote()">
-                    <span>downvote</span></div></span>
+                            <div class="postScore text-center"><span>{{ comment.rating.value }}</span></div>
+                            <div>
+                                <div data-ng-show="is_logged_in()" class="voteButton down" data-ng-click="comment.downvote()" title="Downvote"></div>
+                                <div data-ng-show="!is_logged_in()" class="voteButton"></div>
+                            </div>
                         </div>
                         <div class="commentTextContainer">
                             <p>
