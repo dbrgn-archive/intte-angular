@@ -19,9 +19,15 @@
     <div class="row" data-ng-repeat="entry in entries | orderBy:'-rating.value'">
         <div class="post">
             <div class="voteContainer">
-                <vote-up></vote-up>
+                <div>
+                    <div data-ng-show="is_logged_in()" class="voteButton up" data-ng-click="entry.upvote()" title="Upvote"></div>
+                    <div data-ng-show="!is_logged_in()" class="voteButton"></div>
+                </div>
                 <div class="postScore text-center"><span>{{ entry.rating.value }}</span></div>
-                <vote-down></vote-down>
+                <div>
+                    <div data-ng-show="is_logged_in()" class="voteButton down" data-ng-click="entry.downvote()" title="Downvote"></div>
+                    <div data-ng-show="!is_logged_in()" class="voteButton"></div>
+                </div>
             </div>
             <div class="postContainer">
                 <a href="#/detail/{{entry.id}}" class="postLink">

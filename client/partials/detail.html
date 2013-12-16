@@ -12,9 +12,15 @@
 <div class="container">
     <div class="row posts">
         <div class="voteContainer">
-            <vote-up></vote-up>
+            <div>
+                <div data-ng-show="is_logged_in()" class="voteButton up" data-ng-click="entry_detail.upvote()" title="Upvote"></div>
+                <div data-ng-show="!is_logged_in()" class="voteButton"></div>
+            </div>
             <div class="postScore text-center"><span>{{ entry_detail.rating.value }}</span></div>
-            <vote-down></vote-down>
+            <div>
+                <div data-ng-show="is_logged_in()" class="voteButton down" data-ng-click="entry_detail.downvote()" title="Downvote"></div>
+                <div data-ng-show="!is_logged_in()" class="voteButton"></div>
+            </div>
         </div>
 
         <div class="postContainer">
